@@ -19,14 +19,14 @@
 	</bean>
 
 	
-	<bean id="auditorType" class="com.kingmed.pl.common.vo.AuditorType">
+	<bean id="auditorType" class="cn.edu.sysu.bpm.common.vo.AuditorType">
 			<property name="type_0" value="position" />
 			<property name="type_1" value="person" />
 	</bean>
 
 	<!-- 登录控制器 -->
 	<!-- bean name="loginController" class="com.bps.client.user.LoginController" -->
-	<bean name="loginController" class="com.bps.client.user.KMLoginController" >
+	<bean name="loginController" class="cn.edu.sysu.bpm.ctrl.KMLoginController" >
 	</bean>
 	<!-- 功能控制器 -->
 	<bean name="functionController" class="com.bps.client.user.FunctionController">

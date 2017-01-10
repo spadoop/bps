@@ -17,7 +17,7 @@
 			<property name="msContext" value="/km-ms/" /> -->
 			<property name="domain" value=".kingmed.com.cn" />
 	</bean>
-	<bean id="auditorType" class="com.kingmed.pl.common.vo.AuditorType">
+	<bean id="auditorType" class="cn.edu.sysu.bpm.common.vo.AuditorType">
 			<property name="type_0" value="" />
 			<property name="type_1" value="person" />
 			<property name="type_2" value="position" />

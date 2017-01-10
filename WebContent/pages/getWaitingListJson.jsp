@@ -2,10 +2,10 @@
 <%@ page session="false"%>
 <%@ page import="java.util.List,java.util.Map,java.util.HashMap,java.text.SimpleDateFormat" %>
 <%@ page import="com.eos.workflow.omservice.WFParticipant"%>
-<%@ page import="com.kingmed.pl.common.BpsQueryUtil"%>
-<%@ page import="com.kingmed.pl.common.Fetch4AData"%>
-<%@ page import="com.kingmed.pl.common.vo.User, com.kingmed.pl.common.vo.SearchTaskVO"%>
-<%@ page import="cn.com.deloitte.si.bpm.entity.WFMyWorkItem"%>
+<%@ page import="cn.edu.sysu.bpm.common.BpsQueryUtil"%>
+<%@ page import="cn.edu.sysu.bpm.common.Fetch4AData"%>
+<%@ page import="cn.edu.sysu.bpm.common.vo.User, cn.edu.sysu.bpm.common.vo.SearchTaskVO"%>
+<%@ page import="cn.edu.sysu.bpm.entity.WFMyWorkItem"%>
 <%
 	String userID = request.getParameter("userID");
 	String pIdStr = request.getParameter("pID");

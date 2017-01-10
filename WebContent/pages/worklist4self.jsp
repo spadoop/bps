@@ -2,8 +2,8 @@
 <%@ page import="com.bps.client.common.IPageNavigation"%>
 <%@ page import="com.bps.client.common.Constants"%>
 <%@ page import="com.bps.client.user.UserDataContext"%>
-<%@ page import="com.kingmed.pl.common.BpsQueryUtil"%>
-<%@ page import="com.kingmed.pl.common.vo.User"%>
+<%@ page import="cn.edu.sysu.bpm.common.BpsQueryUtil"%>
+<%@ page import="cn.edu.sysu.bpm.common.vo.User"%>
 <%@ page import="com.eos.workflow.data.WFWorkItem"%>
 <%@ page import="java.util.List,java.util.Map,java.util.HashMap,java.text.SimpleDateFormat" %>
 <%@ include file="/wfclient/common/common.jsp"%>

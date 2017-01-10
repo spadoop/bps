@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="false"%>
 <%@ page import="java.util.List,java.util.Map,java.util.HashMap,java.text.SimpleDateFormat" %>
-<%@ page import="com.kingmed.pl.common.BpsQueryUtil"%>
-<%@ page import="com.kingmed.pl.common.Fetch4AData"%>
-<%@ page import="com.kingmed.pl.common.vo.User"%>
+<%@ page import="cn.edu.sysu.bpm.common.BpsQueryUtil"%>
+<%@ page import="cn.edu.sysu.bpm.common.Fetch4AData"%>
+<%@ page import="cn.edu.sysu.bpm.common.vo.User"%>
 <%@ page import="com.eos.workflow.data.WFWorkItem"%>
 <%@ page import="com.eos.workflow.omservice.WFParticipant"%>
 <%!

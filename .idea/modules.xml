@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/km-platform-bps.iml" filepath="$PROJECT_DIR$/km-platform-bps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform-bps.iml" filepath="$PROJECT_DIR$/platform-bps.iml" />
     </modules>
   </component>
 </project>

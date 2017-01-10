@@ -576,7 +576,7 @@
               <suppressJoinFailure>suppress</suppressJoinFailure>
               <application>
                 <actionType>pojo</actionType>
-                <applicationUri>com.kingmed.pl.common.AuditorCalcProxy.getAuditorsByPositionAndBranch</applicationUri>
+                <applicationUri>AuditorCalcProxy.getAuditorsByPositionAndBranch</applicationUri>
                 <transactionType>join</transactionType>
                 <exceptionStrategy>rollback</exceptionStrategy>
                 <invokePattern>synchronous</invokePattern>
@@ -796,7 +796,7 @@
               <suppressJoinFailure>suppress</suppressJoinFailure>
               <application>
                 <actionType>pojo</actionType>
-                <applicationUri>com.kingmed.pl.common.AuditorCalcProxy.getAuditorsByPositionAndBranch</applicationUri>
+                <applicationUri>AuditorCalcProxy.getAuditorsByPositionAndBranch</applicationUri>
                 <transactionType>join</transactionType>
                 <exceptionStrategy>rollback</exceptionStrategy>
                 <invokePattern>synchronous</invokePattern>
