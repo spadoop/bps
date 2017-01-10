@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	
+	<bean id="urlConfig" class="com.kingmed.platform.modules.constants.UrlConfig">
+			<property name="loginDns" value="http://kmcs-dev.kingmed.com.cn:8080/km-platform-web/toLogin" />
+			<property name="port" value=":8080" />
+			<property name="plDns" value="http://kmcs-dev.kingmed.com.cn" />
+			<property name="plContext" value="/km-platform-web/" />
+			<!-- <property name="msDns" value="http://kcsms.kingmed.com.cn" />
+			<property name="msContext" value="/km-ms/" /> -->
+			<property name="domain" value=".kingmed.com.cn" />
+	</bean>
+	<bean id="auditorType" class="com.kingmed.pl.common.vo.AuditorType">
+			<property name="type_0" value="" />
+			<property name="type_1" value="person" />
+			<property name="type_2" value="position" />
+	</bean>
+</beans>

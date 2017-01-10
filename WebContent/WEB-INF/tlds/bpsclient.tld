@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+	<tlibversion>1.2</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>bc</shortname>
+	<uri>http://bps.primeton.com/tags/bpsclient</uri>
+	<tag>
+		<name>tree</name>
+		<tagclass>com.bps.client.tag.ResourceTreeTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>loader</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>loaderParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>			
+	</tag>
+	<tag>
+		<name>selector</name>
+		<tagclass>com.bps.client.tag.ResourceSelectorTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>loader</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>loaderParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>maxCount</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>useText</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>event</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>needReturn</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>callback</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>callbackOtherParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>buttonValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>resourceTitle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>			
+	</tag>
+	
+	<tag>
+		<name>displayTypeCode</name>
+		<tagclass>com.bps.client.tag.DisplayTypeCodeTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		
+		<attribute>
+			<name>typeCode</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>			
+	</tag>
+	<tag>
+		<name>displayParticipantName</name>
+		<tagclass>com.bps.client.tag.DisplayParticipantNameTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		
+		<attribute>
+			<name>typeCode</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>participantID</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>			
+	</tag>
+	<tag>
+		<name>calendar</name>
+		<tagclass>com.bps.client.tag.CalendarTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>			
+	</tag>
+	<tag>
+		<name>displayProInstCurrentState</name>
+		<tagclass>com.bps.client.tag.DisplayProcessInstancesCurrentStateTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+				
+		<attribute>
+			<name>currentState</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>flag</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>		
+	</tag>
+	
+	<tag>
+		<name>timePatternConvert</name>
+		<tagclass>com.bps.client.tag.TimePatternConvertTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+				
+		<attribute>
+			<name>fromPattern</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>toPattern</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>		
+		<attribute>
+			<name>fromTimeString</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>					
+	</tag>
+	
+	<tag>
+		<name>displayPriority</name>
+		<tagclass>com.bps.client.tag.DisplayPriorityTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+				
+		<attribute>
+			<name>priority</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>				
+	</tag>
+	
+	<tag>
+		<name>message</name>
+		<tagclass>com.bps.client.tag.MessageTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>ignore</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>locale</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>bundle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uddi__address__list>
+  <uddi__address id="default">
+	<name>localserver</name>
+    <logicName>default</logicName>
+    <type>http</type>
+    <description></description>
+    <uddiHost>192.168.2.118</uddiHost>
+    <uddiPort>8280</uddiPort>
+    <uddiWebContext>default</uddiWebContext>
+    <uddiUserID>bps</uddiUserID>
+    <uddiPassword>000000</uddiPassword>
+    <uddiAdminPort>6200</uddiAdminPort>
+  </uddi__address>
+</uddi__address__list>

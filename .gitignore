@@ -1,0 +1,10 @@
+﻿*.log
+
+*.class
+
+*.jar
+
+*.rar
+
+
+target/

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!--parent>
+		<groupId>com.kingmed</groupId>
+		<artifactId>km-base</artifactId>
+		<version>0.6-SNAPSHOT</version>
+	</parent-->
+	
+	<groupId>cn.edu.sysu</groupId>
+	<artifactId>platform-bps</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>platform-bps</name>
+	
+	<properties>
+		<!-- 项目属性 -->
+		<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
+		<jdbc.driver.artifactId>ojdbc6</jdbc.driver.artifactId>
+		<jdbc.driver.version>11.2.0.4</jdbc.driver.version>
+		<!--
+			<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+			<jdbc.driver.version>5.1.22</jdbc.driver.version>
+		-->	
+	</properties>
+
+	<prerequisites>
+  		<maven>3.0.0</maven>
+	</prerequisites>
+	<repositories>
+		<repository>
+			<id>codelds</id>
+			<url>https://code.lds.org/nexus/content/groups/main-repo</url>
+		</repository>
+	</repositories>
+	<!-- 依赖项定义 -->
+	<dependencies>
+		<!-- jdbc driver -->
+		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 >
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.4</version>
+		</dependency-->
+
+		<!-- PERSISTENCE end -->
+
+		<!--dependency>
+			<groupId>com.kingmed.platform.common</groupId>
+			<artifactId>km-platform-common</artifactId>
+			<version>0.8.1-SNAPSHOT</version>
+		</dependency>	
+		<dependency>
+			<groupId>com.kingmed.platform.client</groupId>
+			<artifactId>km-platform-client</artifactId>
+			<version>0.8.1-SNAPSHOT</version>
+		</dependency-->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier><!--指定jdk版本-->
+		</dependency>
+		<dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.3.3.RELEASE</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- finalName，tomcat7plugin使用 -->
+		<finalName>${project.artifactId}</finalName>
+		
+		<plugins>
+	    <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+			<!-- war打包插件, 设定war包名称不带版本号 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<warName>${project.artifactId}</warName>
+				</configuration>
+			</plugin>
+
+			<!-- test插件, 仅测试名称为*Test的类,使用支持分组测试的surefire-junit47 driver -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.16</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<argLine>-Xmx256M</argLine>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>2.16</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+
+
+			<!-- cobertura插件, 设置不需要计算覆盖率的类 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<check>
+						<branchRate>85</branchRate>
+						<lineRate>85</lineRate>
+						<haltOnFailure>true</haltOnFailure>
+						<totalBranchRate>85</totalBranchRate>
+						<totalLineRate>85</totalLineRate>
+						<packageLineRate>85</packageLineRate>
+						<packageBranchRate>85</packageBranchRate>
+						<regexes>
+							<regex>
+								<pattern>com.example.reallyimportant.*</pattern>
+								<branchRate>90</branchRate>
+								<lineRate>80</lineRate>
+							</regex>
+							<regex>
+								<pattern>com.example.boringcode.*</pattern>
+								<branchRate>40</branchRate>
+								<lineRate>30</lineRate>
+							</regex>
+						</regexes>
+					</check>
+					<instrumentation>
+						<excludes>
+							<exclude>**/entity/**/*.class</exclude>
+							<exclude>**/*Controller.class</exclude>
+						</excludes>
+					</instrumentation>
+				</configuration>
+			</plugin>
+
+
+			<!-- tomcat7插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<systemProperties>
+						<systemProperty>
+							<name>spring.profiles.active</name>
+							<value>development</value>
+						</systemProperty>
+					</systemProperties>
+					<!-- tomcat v7为如下配置。 tomcat v6 为"http://localhost:8080/manager" -->
+					<url>http://kcspl.kingmed.com.cn:8080/manager/text</url>
+		
+					<server>tomcat7</server>
+					<!-- 不打包 -->
+					<ignorePackaging>true</ignorePackaging>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<!-- 执行functional test -->
+		<profile>
+			<id>functional-test</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<argLine>-Xmx256M -XX:MaxPermSize=128m</argLine>
+							<includes>
+								<include>**/*FT.java</include>
+							</includes>
+							<!-- 支持taglib tld文件查找的必要设置 -->
+							<useSystemClassLoader>false</useSystemClassLoader>
+							<!-- 将mvn命令行传入的selenium driver参数传入surefire的JVM -->
+							<systemPropertyVariables>
+								<!--selenium.driver>${selenium.driver}</selenium.driver-->
+							</systemPropertyVariables>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- 执行@Category(Smoke.class)的TestCase -->
+		<profile>
+			<id>run-smoke</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<groups>org.springside.modules.test.category.Smoke</groups>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- 刷新开发环境数据库 -->
+		<profile>
+			<id>refresh-db</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<configuration>
+							<target>
+								<property file="src/main/resources/application.development.properties" />
+								<property file="src/main/resources/application.properties" />
+								<sql driver="D" url="E" userid="F" password="G" onerror="continue" encoding="UTF-8">
+									<classpath refid="maven.test.classpath" />
+									<transaction src="src/main/resources/sql/h2/schema.sql" />
+									<transaction src="src/test/resources/data/h2/import-data.sql" />
+								</sql>
+							</target>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>2.3.2</version>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>	

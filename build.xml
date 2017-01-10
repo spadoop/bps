@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="deploy" basedir="." default="deploy">
+	<description>部署脚本</description>
+	<property name="module.name" value="si-auth" />
+	<property name="jar.name" value="kmOrgUser" />
+	<property name="web.home" value="C:/Users/maricao/Documents" />
+	<path id="min.jars">
+		<fileset dir="./WebContent/WEB-INF/lib">
+			<include name="**/bps-server.jar" />
+			<include name="**/dtt-si-core-1.0.0.jar" />
+			<include name="**/log4j-1.2.15.jar" />
+			<include name="**/ojdbc14.jar" />
+			<include name="**/sdo-api-v2.1.0.jar" />
+		</fileset>
+	</path>
+	<path id="thirdparty.jars">
+		<fileset dir="./WebContent/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<target name="clean">
+		<delete dir="./build/${module.name}" />
+		<delete file="./build/${jar.name}.jar" />
+	</target>
+	<target name="compile" depends="clean">
+		<echo>步骤1：编译java</echo>
+		<mkdir dir="./build" />
+		<mkdir dir="./build/${module.name}" />
+		<javac destdir="./build/${module.name}" classpathref="thirdparty.jars" debug="on" debuglevel="lines,source" encoding="UTF-8">
+			<src path="src" />
+		</javac>
+		<jar destfile="./build/${jar.name}.jar">
+			<zipfileset dir="./build/${module.name}/com/kingmed/common/" prefix="com/kingmed/common/" />
+			<zipfileset dir="./sql/" prefix="">
+			</zipfileset>
+		</jar>
+	</target>
+	<target name="deploy" depends="compile">
+		<echo>copy to web</echo>
+		<copy todir="${web.home}">
+			<fileset dir="./build/">
+				<include name="${jar.name}.jar"/>
+			</fileset>
+		</copy>
+		<delete dir="./build" />
+	</target>
+</project>

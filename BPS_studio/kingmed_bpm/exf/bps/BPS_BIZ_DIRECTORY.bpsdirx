@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<businessCatalog>
+  <id>1</id>
+  <name>领域业务目录</name>
+  <order>2</order>
+  <sequence>1.</sequence>
+  <isLeaf>0</isLeaf>
+  <description>根据实际业务分类进行管理的一系列具备业务含义的业务目录和业务资源的集合</description>
+  <subCatalogs>
+    <businessCatalog>
+      <id>6c5f0d0268754877a1c7c0c87e7d801e</id>
+      <name>客服系统</name>
+      <parentID>1</parentID>
+      <order>1</order>
+      <sequence>1.6c5f0d0268754877a1c7c0c87e7d801e.</sequence>
+      <isLeaf>0</isLeaf>
+      <description>客服系统</description>
+      <subCatalogs/>
+    </businessCatalog>
+  </subCatalogs>
+</businessCatalog>

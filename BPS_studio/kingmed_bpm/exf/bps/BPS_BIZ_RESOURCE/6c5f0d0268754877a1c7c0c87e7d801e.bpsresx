@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource>
+  <catalogID>6c5f0d0268754877a1c7c0c87e7d801e</catalogID>
+  <bizCommResources>
+    <businessCommRes>
+      <resourceUUID>9b2fff56cbb54261aab84f299abb3583</resourceUUID>
+      <resourceName>任务执行分支规则</resourceName>
+      <catalogUUID>6c5f0d0268754877a1c7c0c87e7d801e</catalogUUID>
+      <resourceImpl>com.kingmed.pl.common.BpsHelperForCs.getMatchByWorkTheme</resourceImpl>
+      <resourceType>pojo</resourceType>
+      <resourceScope>00110000</resourceScope>
+      <parameters>
+        <parameter>
+          <name>procssInstID</name>
+          <dataType>
+            <typeClass>primitive</typeClass>
+            <typeValue>java.lang.String</typeValue>
+          </dataType>
+          <mode>parameter</mode>
+        </parameter>
+        <parameter>
+          <name>checkWorkTheme</name>
+          <dataType>
+            <typeClass>primitive</typeClass>
+            <typeValue>java.lang.String</typeValue>
+          </dataType>
+          <mode>parameter</mode>
+        </parameter>
+        <parameter>
+          <name>out</name>
+          <dataType>
+            <typeClass>primitive</typeClass>
+            <typeValue>java.lang.String</typeValue>
+          </dataType>
+          <mode>result</mode>
+        </parameter>
+      </parameters>
+      <busiResType>02</busiResType>
+    </businessCommRes>
+  </bizCommResources>
+  <bizRules/>
+  <bizCalendars/>
+</resource>

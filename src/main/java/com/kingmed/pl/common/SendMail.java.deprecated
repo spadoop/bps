@@ -1,0 +1,431 @@
+package com.kingmed.pl.common;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Collection;
+
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
+import org.apache.log4j.Logger;
+
+import com.eos.common.mail.MailFactory;
+import com.eos.workflow.data.WFActivityInst;
+import com.eos.workflow.data.WFProcessInst;
+import com.eos.workflow.data.WFWorkItem;
+import com.eos.workflow.omservice.WFParticipant;
+import com.kingmed.platform.client.security.UserRemoteUtil;
+import com.kingmed.platform.modules.entity.User;
+import com.primeton.workflow.api.EngineService;
+import com.primeton.workflow.engine.common.exception.WFEngineException;
+import com.primeton.workflow.service.organization.util.WFParticipantUtil;
+
+public class SendMail {
+	private Logger log = Logger.getLogger(SendMail.class.getName());
+
+	public void sendAuditPromotionMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("促销审核邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		if(this.checkFlag(processInst.getProcessInstID())){
+			this.sendEmail(MsProperUtil.getMailTemplateTitlePromotion(), MsProperUtil
+					.getMailTemplateContentPromotionFail(), workItem.getWorkItemID(), workItem.getParticipant());
+		}else{
+			/*this.sendEmail(MsProperUtil.getMailTemplateTitlePromotion(), MsProperUtil
+					.getMailTemplateContentPromotionSuccess(), workItem.getWorkItemID());*/
+		}
+	}
+	
+	public void sendFinishPromotionMsg(
+			WFProcessInst processInst) {
+		System.out.println("促销管理审核成功后，邮件发送！！");
+		SimpleEmail mail = MailFactory.getSimpleEmailInstance();
+		mail.setHostName(MsProperUtil.getHostname());
+		mail.setAuthentication(MsProperUtil.getUsername(), MsProperUtil.getPassword());
+		mail.setSubject(MsProperUtil.getMailTemplateTitlePromotion());
+		
+		User user = UserRemoteUtil.findUserByAccountId(processInst.getCreator());
+		
+		try {
+			if (user.getEmail() != null) {
+				mail.addTo(user.getEmail());
+			}
+			mail.setFrom(MsProperUtil.getSetFrom());
+			mail.buildMimeMessage();
+			mail.getMimeMessage().setText(
+					MsProperUtil
+					.getMailTemplateContentPromotionSuccess(),
+					"UTF-8");
+			mail.sendMimeMessage();
+		} catch (Exception e) {
+			log.error("发送邮件异常"+e.getMessage());
+			log.error("发送邮件异常"+getTrace(e));
+		}
+	}
+	
+	public void sendSubmitPromotionMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("促销提交邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		this.sendEmail(MsProperUtil.getMailTemplateTitlePromotion(), MsProperUtil
+				.getMailTemplateContentPromotionSubmit(), workItem.getWorkItemID(), workItem.getParticipant());
+	}
+	
+	public void sendAuditCompactMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("合同审核邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		if(this.checkFlag(processInst.getProcessInstID())){
+			this.sendEmail(MsProperUtil.getMailTemplateTitleCompact(), MsProperUtil
+					.getMailTemplateContentCompactFail(), workItem.getWorkItemID(), workItem.getParticipant());
+		}else{
+			/*this.sendEmail(MsProperUtil.getMailTemplateTitleCompact(), MsProperUtil
+					.getMailTemplateContentCompactSuccess(), workItem.getWorkItemID());*/
+		}
+	}
+	
+	public void sendFinishCompactMsg(
+			WFProcessInst processInst) {
+		System.out.println("合同管理审核成功后，邮件发送！！");
+		SimpleEmail mail = MailFactory.getSimpleEmailInstance();
+		mail.setHostName(MsProperUtil.getHostname());
+		mail.setAuthentication(MsProperUtil.getUsername(), MsProperUtil.getPassword());
+		mail.setSubject(MsProperUtil.getMailTemplateTitleCompact());
+		
+		User user = UserRemoteUtil.findUserByAccountId(processInst.getCreator());
+		
+		try {
+			if (user.getEmail() != null) {
+				mail.addTo(user.getEmail());
+			}
+			mail.setFrom(MsProperUtil.getSetFrom());
+			mail.buildMimeMessage();
+			mail.getMimeMessage().setText(
+					MsProperUtil
+					.getMailTemplateContentCompactSuccess(),
+					"UTF-8");
+			mail.sendMimeMessage();
+		} catch (Exception e) {
+			log.error("发送邮件异常"+e.getMessage());
+			log.error("发送邮件异常"+getTrace(e));
+		}
+	}
+	
+	public void sendSubmitCompactMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("合同提交邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		this.sendEmail(MsProperUtil.getMailTemplateTitleCompact(), MsProperUtil
+				.getMailTemplateContentCompactSubmit(), workItem.getWorkItemID(), workItem.getParticipant());
+	}
+	
+	public void sendAuditPriceMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("物价管理审核邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		if(this.checkFlag(processInst.getProcessInstID())){
+			this.sendEmail(MsProperUtil.getMailTemplateTitlePrice(), MsProperUtil
+					.getMailTemplateContentCustomerFail(), workItem.getWorkItemID(), workItem.getParticipant());
+		}else{
+			/*this.sendEmail(MsProperUtil.getMailTemplateTitlePrice(), MsProperUtil
+					.getMailTemplateContentPriceSuccess(), workItem.getWorkItemID());*/
+		}
+
+	}
+	
+	public void sendFinishPriceMsg(
+			WFProcessInst processInst) {
+		System.out.println("物价管理审核成功后，邮件发送！！");
+		SimpleEmail mail = MailFactory.getSimpleEmailInstance();
+		mail.setHostName(MsProperUtil.getHostname());
+		mail.setAuthentication(MsProperUtil.getUsername(), MsProperUtil.getPassword());
+		mail.setSubject(MsProperUtil.getMailTemplateTitlePrice());
+		
+		User user = UserRemoteUtil.findUserByAccountId(processInst.getCreator());
+		
+		try {
+			if (user.getEmail() != null) {
+				mail.addTo(user.getEmail());
+			}
+			mail.setFrom(MsProperUtil.getSetFrom());
+			mail.buildMimeMessage();
+			mail.getMimeMessage().setText(
+					MsProperUtil
+					.getMailTemplateContentPriceSuccess(),
+					"UTF-8");
+			mail.sendMimeMessage();
+		} catch (Exception e) {
+			log.error("发送邮件异常"+e.getMessage());
+			log.error("发送邮件异常"+getTrace(e));
+		}
+	}
+	
+	public void sendSubmitPriceMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("物价管理提交邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		this.sendEmail(MsProperUtil.getMailTemplateTitlePrice(), MsProperUtil
+				.getMailTemplateContentPriceSubmit(), workItem.getWorkItemID(), workItem.getParticipant());
+	}
+	
+	public void sendAuditCustomerMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("客户档案审核邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		if(this.checkFlag(processInst.getProcessInstID())){
+			try {
+				this.sendEmail(MsProperUtil.getMailTemplateTitleCustomer(), MsProperUtil
+						.getMailTemplateContentCustomerFail(), workItem.getWorkItemID(), workItem.getParticipant());
+			} catch (Exception e) {
+				log.error(e.getMessage());
+				log.error("发送邮件异常"+getTrace(e));
+			}
+		}else{
+			/*this.sendEmail(MsProperUtil.getMailTemplateTitleCustomer(), MsProperUtil
+					.getMailTemplateContentCustomerSuccess(), workItem.getWorkItemID());*/
+		}
+	}
+	
+	public void sendFinishCustomerMsg(
+			WFProcessInst processInst) {
+		System.out.println("客户档案审核成功后，邮件发送！！");
+		SimpleEmail mail = MailFactory.getSimpleEmailInstance();
+		mail.setHostName(MsProperUtil.getHostname());
+		mail.setAuthentication(MsProperUtil.getUsername(), MsProperUtil.getPassword());
+		mail.setSubject(MsProperUtil.getMailTemplateTitleCustomer());
+		
+		User user = UserRemoteUtil.findUserByAccountId(processInst.getCreator());
+		
+		try {
+			if (user.getEmail() != null) {
+				mail.addTo(user.getEmail());
+			}
+			mail.setFrom(MsProperUtil.getSetFrom());
+			mail.buildMimeMessage();
+			mail.getMimeMessage().setText(
+					MsProperUtil
+					.getMailTemplateContentCustomerSuccess(),
+					"UTF-8");
+			mail.sendMimeMessage();
+		} catch (Exception e) {
+			log.error("发送邮件异常"+e.getMessage());
+			log.error("发送邮件异常"+getTrace(e));
+		}
+	}
+	
+	
+	public void sendSubmitCustomerMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("客户档案提交邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		this.sendEmail(MsProperUtil.getMailTemplateTitleCustomer(), MsProperUtil
+				.getMailTemplateContentCustomerSubmit(), workItem.getWorkItemID(), workItem.getParticipant());
+	}
+	
+	public void sendAuditSuitMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("营销套餐审核邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		if(this.checkFlag(processInst.getProcessInstID())){
+			this.sendEmail(MsProperUtil.getMailTemplateTitleSuit(), MsProperUtil
+					.getMailTemplateContentSuitFail(), workItem.getWorkItemID(), workItem.getParticipant());
+		}else{
+			/*this.sendEmail(MsProperUtil.getMailTemplateTitleSuit(), MsProperUtil
+					.getMailTemplateContentSuitSuccess(), workItem.getWorkItemID());*/
+		}
+
+	}
+	
+	public void sendFinishSuitMsg(
+			WFProcessInst processInst) {
+		System.out.println("营销套餐审核成功后，邮件发送！！");
+		SimpleEmail mail = MailFactory.getSimpleEmailInstance();
+		mail.setHostName(MsProperUtil.getHostname());
+		mail.setAuthentication(MsProperUtil.getUsername(), MsProperUtil.getPassword());
+		mail.setSubject(MsProperUtil.getMailTemplateTitleSuit());
+		
+		User user = UserRemoteUtil.findUserByAccountId(processInst.getCreator());
+		
+		try {
+			if (user.getEmail() != null) {
+				mail.addTo(user.getEmail());
+			}
+			mail.setFrom(MsProperUtil.getSetFrom());
+			mail.buildMimeMessage();
+			mail.getMimeMessage().setText(
+					MsProperUtil
+					.getMailTemplateContentSuitSuccess(),
+					"UTF-8");
+			mail.sendMimeMessage();
+		} catch (Exception e) {
+			log.error("发送邮件异常"+e.getMessage());
+			log.error("发送邮件异常"+getTrace(e));
+		}
+	}
+	
+	public void sendSubmitSuitMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("营销套餐提交邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		this.sendEmail(MsProperUtil.getMailTemplateTitleSuit(), MsProperUtil
+				.getMailTemplateContentSuitSubmit(), workItem.getWorkItemID(), workItem.getParticipant());
+
+	}
+	
+	public void sendAuditTargetMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("销售目标审核邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		if(this.checkFlag(processInst.getProcessInstID())){
+			this.sendEmail(MsProperUtil.getMailTemplateTitleTarget(), MsProperUtil
+					.getMailTemplateContentTargetFail(), workItem.getWorkItemID(), workItem.getParticipant());
+		}else{
+			/*this.sendEmail(MsProperUtil.getMailTemplateTitleTarget(), MsProperUtil
+					.getMailTemplateContentTargetSuccess(), workItem.getWorkItemID());*/
+		}
+	}
+	
+	public void sendFinishTargetMsg(
+			WFProcessInst processInst) {
+		System.out.println("销售目标审核成功后，邮件发送！！");
+		SimpleEmail mail = MailFactory.getSimpleEmailInstance();
+		mail.setHostName(MsProperUtil.getHostname());
+		mail.setAuthentication(MsProperUtil.getUsername(), MsProperUtil.getPassword());
+		mail.setSubject(MsProperUtil.getMailTemplateTitleTarget());
+		
+		User user = UserRemoteUtil.findUserByAccountId(processInst.getCreator());
+		
+		try {
+			if (user.getEmail() != null) {
+				mail.addTo(user.getEmail());
+			}
+			mail.setFrom(MsProperUtil.getSetFrom());
+			mail.buildMimeMessage();
+			mail.getMimeMessage().setText(
+					MsProperUtil
+					.getMailTemplateContentTargetSuccess(),
+					"UTF-8");
+			mail.sendMimeMessage();
+		} catch (Exception e) {
+			log.error("发送邮件异常"+e.getMessage());
+			log.error("发送邮件异常"+getTrace(e));
+		}
+	}
+	
+	public void sendSubmitTargetMsg(WFWorkItem workItem, WFActivityInst actInst,
+			WFProcessInst processInst) {
+		System.out.println("销售目标提交邮件发送！！");
+		if (!"true".equalsIgnoreCase(MsProperUtil.getEmailSendIsFlag())) {
+			return;
+		}
+		this.sendEmail(MsProperUtil.getMailTemplateTitleTarget(), MsProperUtil
+				.getMailTemplateContentTargetSubmit(), workItem.getWorkItemID(), workItem.getParticipant());
+
+	}
+
+	private void sendEmail(String subject,String msg,long workItemId,String partiId){
+		System.out.println("统一邮件发送！！");
+		SimpleEmail mail = MailFactory.getSimpleEmailInstance();
+		mail.setHostName(MsProperUtil.getHostname());
+		mail.setAuthentication(MsProperUtil.getUsername(), MsProperUtil.getPassword());
+		mail.setSubject(subject);
+		try {
+			//mail.setMsg(msg);
+//			Collection<WFParticipant> destPartList = WFParticipantUtil
+//					.getAllLeafsInWFParticipantList2(EngineService
+//							.getWorkItemManager().queryWorkItemParticipants(
+//									EngineService.getConnectManager()
+//											.getInternalSessionHandle(MsProperUtil.getEngineSessionHandle()),
+//											workItemId, true));
+//			for (WFParticipant parti : destPartList) {
+//
+//				User user = UserRemoteUtil.findUserByAccountId(parti.getId());
+//
+//				if (user.getEmail() != null) {
+//					mail.addTo(user.getEmail());
+//				}
+//				mail.setFrom(MsProperUtil.getSetFrom());
+//				mail.buildMimeMessage();
+//				mail.getMimeMessage().setText(
+//						msg,
+//						"UTF-8");
+//				mail.sendMimeMessage();
+//			}
+			
+			String[] partis = partiId.split("\\|");
+			for(String p : partis){
+				User user = UserRemoteUtil.findUserByAccountId(p);
+				if (user.getEmail() != null) {
+					mail.addTo(user.getEmail());
+				}
+				mail.setFrom(MsProperUtil.getSetFrom());
+				mail.buildMimeMessage();
+				mail.getMimeMessage().setText(
+						msg,
+						"UTF-8");
+				mail.sendMimeMessage();
+			}
+			
+		} catch (Exception e) {
+			log.error("发送邮件异常"+e.getMessage());
+			log.error("发送邮件异常"+getTrace(e));
+		}
+		
+	}
+	
+	private boolean checkFlag(long processId){
+		System.out.println("检验邮件发送！！");
+		String checkFlag = null;
+		try {
+			checkFlag = (String) EngineService.getRelativeDataManager().getRelativeData(EngineService.getConnectManager().getInternalSessionHandle(MsProperUtil.getEngineSessionHandle()), processId, "checkFlag");
+		} catch (WFEngineException e) {
+			log.error(e.getMessage());
+		}
+		return "rejectToStart".equals(checkFlag);
+
+	}
+	
+	private static String getTrace(Throwable t) {
+	        StringWriter stringWriter= new StringWriter();
+	        PrintWriter writer= new PrintWriter(stringWriter);
+	        t.printStackTrace(writer);
+	        StringBuffer buffer= stringWriter.getBuffer();
+	        return buffer.toString();
+	    }
+	
+	/*public static void main(String[] args) throws Exception {
+		SendMail sendEmail = new SendMail();
+		sendEmail.sendEmail("asdfads", "jasdfads", 10L);
+		SimpleEmail mail = MailFactory.getSimpleEmailInstance();
+		mail.setHostName("kingmed.com.cn");
+		mail.setAuthentication("kmcs-notification", "kmcs-notification@123456");
+		mail.addTo("419396409@qq.com");
+		mail.setFrom(MsProperUtil.getSetFrom());
+		mail.buildMimeMessage();
+		mail.getMimeMessage().setText(
+				"fasasdf",
+				"UTF-8");
+		mail.sendMimeMessage();
+	}*/
+}
